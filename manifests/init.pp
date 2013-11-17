@@ -1,5 +1,6 @@
 class webmin(
-  $port = '10000',
+  $webmin_port = '10000',
+  $usermin_port = '20000',
   $proxy = 'absent',
   $csf = false,
   $ensure = 'latest',
@@ -13,26 +14,28 @@ class webmin(
       gpgkey     => 'http://www.webmin.com/jcameron-key.asc',
       descr      => 'Webmin Distribution',
     }
-    package { 'webmin':
-      ensure => $ensure,
+    $pkgs = [
+      'usermin',
+      'webmin',
+    ]
+    package { $pkgs:
+      ensure  => $ensure,
       require => Yumrepo['webmin'],
     }
-    package { 'perl-Net-SSLeay':
-      ensure => present,
-    }
-    augeas { 'miniserv.conf':
+    ensure_packages(['perl-Net-SSLeay'])
+    augeas { 'webmin_miniserv':
       context => "/files/etc/webmin/miniserv.conf",
       changes => [
         "set ssl 1",
-        "set port $port",
+        "set port $webmin_port",
       ],
       notify  => Service['webmin'],
       require => Package['webmin'],
     }
     service { 'webmin':
-      ensure => running,
-      enable => true,
-      subscribe => Package['webmin'],
+      ensure    => running,
+      enable    => true,
+      subscribe => Package[$pkgs],
     }
     if ( $csf == true ) {
       File {
