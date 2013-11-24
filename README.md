@@ -20,7 +20,7 @@ This will just install webmin and not install usermin.
 ```
 ### Enable Config Server Firewall plugin
 If you have Config Server Firewall installed, you can enable the Webmin plugin.
-*NOTE: visit http://www.configserver.com to learn more about csf
+(visit http://www.configserver.com to learn more about csf)
 ```
   class { 'webmin':
     csf => true,
