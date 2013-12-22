@@ -9,6 +9,12 @@ class webmin::usermin_pkg (
     package { 'usermin':
       ensure  => $ensure,
     }
+    file { '/usr/share/augeas/lenses/dist/tests':
+      ensure => directory,
+      owner  => '0',
+      group  => '0',
+      mode   => '0755',
+    }
     file { '/usr/share/augeas/lenses/dist/tests/test_usermin.aug':
       ensure => present,
       owner  => '0',

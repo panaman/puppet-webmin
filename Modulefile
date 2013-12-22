@@ -1,5 +1,5 @@
 name    'panaman-webmin'
-version '1.0.0'
+version '1.0.1'
 source 'https://github.com/panaman/puppet-webmin'
 author 'Panaman'
 license = 'Apache 2.0'
