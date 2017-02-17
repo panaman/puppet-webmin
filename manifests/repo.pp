@@ -20,17 +20,21 @@ class webmin::repo (
       location    => 'http://webmin.mirror.somersettechsolutions.co.uk/repository',
       release     => 'sarge',
       repos       => 'contrib',
-      key         => '1719003ACE3E5A41E2DE70DFD97A3AE911F63C51',
-      key_source  => 'http://www.webmin.com/jcameron-key.asc',
-      include_src => false,
+      key         => {
+        'id'      => '1719003ACE3E5A41E2DE70DFD97A3AE911F63C51',
+        'source'  => 'http://www.webmin.com/jcameron-key.asc',
+      },
+     include      => { 'src' => false },
     } 
     apt::source { 'webmin_main':
       location    => 'http://download.webmin.com/download/repository',
       release     => 'sarge',
       repos       => 'contrib',
-      key         => '1719003ACE3E5A41E2DE70DFD97A3AE911F63C51',
-      key_source  => 'http://www.webmin.com/jcameron-key.asc',
-      include_src => false,
+      key         => {
+        'id'      => '1719003ACE3E5A41E2DE70DFD97A3AE911F63C51',
+        'source'  => 'http://www.webmin.com/jcameron-key.asc',
+      },
+      include      => { 'src' => false },
     }
   } else {}
 }
